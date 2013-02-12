@@ -33,7 +33,7 @@ define ('PATH_VIEWS', realpath(PATH_APP.'/views'));
 define ('PATH_EXT', realpath(PATH_CORE.'/ext'));
 define ('PATH_UTL', realpath(PATH_APP.'/utl'));
 define ('PATH_CORE_UTL', realpath(PATH_CORE.'/utl'));
-define ('PATH_WWW', realpath(__DIR__.'/../www'));
+define ('PATH_WWW', realpath(PATH_APP.'/www'));
 define ('PATH_VAR', realpath(PATH_APP.'/var'));
 define ('PATH_LOG', realpath(PATH_VAR.'/log'));
 define ('DEFAULT_COUNTRY', \Country::getCode('Cyprus'));
