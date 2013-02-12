@@ -19,8 +19,8 @@ define ('BRAND_DEFAULT', 'default');
 
 $brand = BRAND_DEFAULT;
 
-if (!empty($argv[1])) {
-	$brand = $argv[1];
+if (!empty($argv[2])) {
+	$brand = $argv[2];
 } elseif (!empty($_SERVER['HTTP_HOST'])) {
 	
 	if (preg_match ('/somekey/i', $_SERVER['HTTP_HOST'])) {

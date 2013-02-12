@@ -3,4 +3,4 @@
 
 define('APP_LEVEL', 'SCHEDULER');
 
-require "../bootstrap.php";
+require __DIR__."/bootstrap.php";

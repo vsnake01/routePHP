@@ -1,7 +1,20 @@
 <?php
-if (!defined('PATH_APP')) {
+if (!defined('APP_LEVEL')) {
+	echo 'APP_LEVEL is not defined';
+	exit;
+}
+
+if (!defined('PATH_APP') && APP_LEVEL == 'WEB') {
 	echo 'PATH_APP is not defined';
 	exit;
+}
+
+if (APP_LEVEL == 'SCHEDULER') {
+	if (empty($argv[1])) {
+		echo 'PATH_APP should be provided as first argument';
+		exit;
+	}
+	define ('PATH_APP', $argv[1]);
 }
 
 spl_autoload_register("MainLoad");
@@ -35,9 +48,6 @@ require_once PATH_APP.'/config.php';
 
 try
 {
-	if (!defined('APP_LEVEL')) {
-		return;
-	}
 	if (APP_LEVEL == 'WEB') {
 		new Dispatcher;
 	}
