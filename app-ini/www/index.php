@@ -1,4 +1,5 @@
 <?php
+define('PATH_APP', __DIR__.'/..');
 define('APP_LEVEL', 'WEB');
 
-require "../../core/bootstrap.php";
+require PATH_APP."/../core/bootstrap.php";

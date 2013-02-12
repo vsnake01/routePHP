@@ -1,11 +1,15 @@
 <?php
+if (defined('PATH_APP')) {
+	echo 'PATH_APP is not defined';
+	exit;
+}
+
 spl_autoload_register("MainLoad");
 
 if(in_array("__autoload", spl_autoload_functions()))
 	spl_autoload_register("__autoload");
 
 define ('PATH_CORE', __DIR__);
-define ('PATH_APP', __DIR__.'/../app');
 
 define ('PATH_ETC', realpath(PATH_APP.'/etc'));
 define ('PATH_CLASSES', realpath(PATH_CORE.'/classes'));
