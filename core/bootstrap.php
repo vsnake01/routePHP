@@ -1,5 +1,5 @@
 <?php
-if (defined('PATH_APP')) {
+if (!defined('PATH_APP')) {
 	echo 'PATH_APP is not defined';
 	exit;
 }
