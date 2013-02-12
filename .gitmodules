@@ -1,0 +1,6 @@
+[submodule "core/ext/monolog"]
+	path = core/ext/monolog
+	url = https://github.com/Seldaek/monolog.git
+[submodule "core/ext/pfbc"]
+	path = core/ext/pfbc
+	url = https://github.com/vsnake01/php-form-builder-class.git
