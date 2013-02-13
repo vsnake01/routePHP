@@ -150,6 +150,37 @@ class User extends Base
 		
 		$this->logger->debug("Added profile: $insertID");
 		
+		foreach ($fields as $k=>$v) {
+			if (in_array ($k, $this->restrictedFields)) {
+				continue;
+			}
+			if (in_array ($k, $this->masterFields)) {
+				continue;
+			}
+			$query = "
+				insert into users_info (user_id, `key`, `val`) values (:id, :key, :val)
+				on duplicate key update `val`=:newval
+				";
+			if (!$st = $this->db()->prepare($query)) {
+				$this->logger->error("Can not insert user info: $k $v");
+				return false;
+			}
+			
+			if (is_array ($v)) {
+				$v = json_encode($v);
+			}
+			
+			$st->bindValue(':id', $insertID, PDO::PARAM_INT);
+			$st->bindValue(':key', $k, PDO::PARAM_STR);
+			$st->bindValue(':val', $v, PDO::PARAM_STR);
+			$st->bindValue(':newval', $v, PDO::PARAM_STR);
+			
+			if (!$st->execute()) {
+				$this->logger->error("Can not nsert user info [statement]: $k $v; SQL: " . print_r ($st->errorInfo(), true));
+				return false;
+			}
+		}
+
 		return $insertID;
 	}
 	
