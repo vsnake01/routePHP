@@ -14,7 +14,7 @@ class Config
 		$class = strtolower(str_replace('\\', '/', get_class($this)));
 		
 		if (defined ('BRAND')) {
-			$file_brand = PATH_ETC.'/'.BRAND.'/'.$class.'.php';
+			$file_brand = PATH_ETC.'/brands/'.BRAND.'/'.$class.'.php';
 		}
 		$file = PATH_ETC.'/'.$class.'.php';
 		
