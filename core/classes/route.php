@@ -388,10 +388,10 @@ class Route extends Config
 		} elseif (is_file($FILE_S)) {
 			// If we have access to private area
 			include $FILE_S;
-		} elseif (file_exists($FOLDER_S_BRAND)) {
+		} elseif (file_exists($FOLDER_S_BRAND) && file_exists ($FOLDER_S_BRAND.'/index.php')) {
 			// If we have access to private area
 			include $FOLDER_S_BRAND.'/index.php';
-		} elseif (file_exists($FOLDER_S)) {
+		} elseif (file_exists($FOLDER_S) && file_exists ($FOLDER_S.'/index.php')) {
 			// If we have access to private area
 			include $FOLDER_S.'/index.php';
 		} elseif (is_file($FILE_BRAND)) {
@@ -400,10 +400,10 @@ class Route extends Config
 		} elseif (is_file($FILE)) {
 			// If we have access to private area
 			include $FILE;
-		} elseif (file_exists($FOLDER_BRAND)) {
+		} elseif (file_exists($FOLDER_BRAND) && file_exists ($FOLDER_BRAND.'/index.php')) {
 			// If we have access to private area
 			include $FOLDER_BRAND.'/index.php';
-		} elseif (file_exists($FOLDER)) {
+		} elseif (file_exists($FOLDER) && file_exists ($FOLDER.'/index.php')) {
 			// If we have access to private area
 			include $FOLDER.'/index.php';
 		} else {
