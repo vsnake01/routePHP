@@ -296,11 +296,11 @@ class Route extends Config
 		$FILE = $file;
 		$FOLDER = $folder;
 		
-		$folder = PATH_VIEWS . strtolower('/themes/' . BRAND . '/' . $view);
-		$file = $folder.'.php';
+		$folder_brand = PATH_VIEWS . strtolower('/themes/' . BRAND . '/' . $view);
+		$file_brand = $folder_brand.'.php';
 		
-		$FILE_BRAND = $file;
-		$FOLDER_BRAND = $folder;
+		$FILE_BRAND = $file_brand;
+		$FOLDER_BRAND = $folder_brand;
 		
 		if ($this->prefix) {
 			// We have some special content
@@ -311,7 +311,7 @@ class Route extends Config
 			$FOLDER_S = $folder_;
 			
 			$folder_brand_ = PATH_VIEWS . strtolower('/themes/' . BRAND . '/' . $this->prefix . '/' . $view);
-			$file_brand_ = $folder_.'.php';
+			$file_brand_ = $folder_brand_.'.php';
 			
 			$FILE_S_BRAND = $file_brand_;
 			$FOLDER_S_BRAND = $folder_brand_;
@@ -331,7 +331,7 @@ class Route extends Config
 			$file = $folder.'.php';
 			
 			$folder_brand = PATH_VIEWS . strtolower('/themes/' . BRAND . '/' . $view);
-			$file_brand = $folder.'.php';
+			$file_brand = $folder_brand.'.php';
 			
 			if ($this->prefix) {
 				// We have some special content
@@ -339,14 +339,14 @@ class Route extends Config
 				$file_ = $folder_.'.php';
 
 				$folder_brand_ = PATH_VIEWS . strtolower('/themes/' . BRAND . '/' . $this->prefix . '/' . $view);
-				$file_brand_ = $folder_.'.php';
+				$file_brand_ = $folder_brand_.'.php';
 				
 				if (file_exists($folder_brand_)) {
 					continue;
 				}
 				
 				if (file_exists($file_brand_)) {
-					$FILE_S_BRAND = $file_;
+					$FILE_S_BRAND = $file_brand_;
 				}
 				
 				if (file_exists($folder_)) {
@@ -354,7 +354,7 @@ class Route extends Config
 				}
 				
 				if (file_exists($file_)) {
-					$FILE_S_BRAND = $file_;
+					$FILE_S = $file_;
 				}
 			}
 			
@@ -364,7 +364,7 @@ class Route extends Config
 			}
 			
 			if (file_exists($file_brand)) {
-				$FILE_BRAND  = $file;
+				$FILE_BRAND  = $file_brand;
 			}
 			
 			if (file_exists($folder)) {
