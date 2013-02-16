@@ -12,13 +12,21 @@ class Config
 	public function __construct()
 	{
 		$class = strtolower(str_replace('\\', '/', get_class($this)));
+		
+		if (defined ('BRAND')) {
+			$file_brand = PATH_ETC.'/'.BRAND.'/'.$class.'.php';
+		}
 		$file = PATH_ETC.'/'.$class.'.php';
 		
 		$local_config = array ();
 		
+		if (file_exists($file_brand)) {
+			include $file;
+			$local_config = array_merge ($local_config, $config);
+		}
 		if (file_exists($file)) {
 			include $file;
-			$local_config = $config;
+			$local_config = array_merge ($local_config, $config);
 		}
 		
 		$file = PATH_ETC.'/global.php';
