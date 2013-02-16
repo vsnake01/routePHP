@@ -26,7 +26,7 @@ class Config
 		}
 		if (file_exists($file_brand)) {
 			include $file_brand;
-			$local_config = array_merge ($local_config, $config);
+			$local_config = array_merge_recursive_distinct ($local_config, $config);
 		}
 		
 		$file = PATH_ETC.'/global.php';
