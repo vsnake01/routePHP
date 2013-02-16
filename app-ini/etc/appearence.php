@@ -6,7 +6,7 @@ $sharedConfig = array (
 		'test' => 'Test Value',
 	),
 );
-$config['default'] = array_merge($sharedConfig, array (
+$config[BRAND_DEFAULT] = array_merge($sharedConfig, array (
 			'logo' => '/branding/default/logo.png',
 			'maillogo' => '/branding/default/logo.png',
 			'welcomelogo' => '/branding/default/logo.png',
