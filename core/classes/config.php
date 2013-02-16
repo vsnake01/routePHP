@@ -20,11 +20,11 @@ class Config
 		
 		$local_config = array ();
 		
-		if (file_exists($file_brand)) {
+		if (file_exists($file)) {
 			include $file;
 			$local_config = array_merge ($local_config, $config);
 		}
-		if (file_exists($file)) {
+		if (file_exists($file_brand)) {
 			include $file;
 			$local_config = array_merge ($local_config, $config);
 		}
