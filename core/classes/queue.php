@@ -7,18 +7,15 @@
  */
 class Queue extends Base
 {
-	private $taskMapper = array (
-		'tokens'	=> '\\Token',
-		'mail'		=> '\\Mailer',
-		'deposit'	=> '\\Account',
-		'withdraw'	=> '\\Account',
-		'account'	=> '\\Account',
-		'crm_push'	=> '\\CRM',
-	);
+	private $taskMapper = array ();
 	
 	public function __construct($logger=true)
 	{
 		parent::__construct($logger);
+		$conf = $this->getConfig('tasks');
+		if (!empty ($conf)) {
+			$this->taskMapper = $conf;
+		}
 	}
 	
 	public function run()
