@@ -70,9 +70,9 @@ class Country
 			if ($code == 'US' || $code == 'UM') {
 				continue;
 			}
-			$listCodes[] = $code;
-			$listNames[] = $m[1][$index];
-			$list[$code] = $m[1][$index];
+			$listCodes[] = trim($code);
+			$listNames[] = trim($m[1][$index]);
+			$list[$code] = trim($m[1][$index]);
 		}
 		self::$listCodes = $listCodes;
 		self::$listNames = $listNames;
