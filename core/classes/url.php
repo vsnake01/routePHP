@@ -21,7 +21,7 @@ class Url
 	{
 		return 
 			'http' .
-			(isset($_SERVER['HTPS'])?'s':'') .
+			(isset($_SERVER['HTTPS'])?'s':'') .
 			'://' .
 			$_SERVER['HTTP_HOST'];
 	}
