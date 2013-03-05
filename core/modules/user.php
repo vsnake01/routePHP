@@ -617,6 +617,128 @@ class User extends Base
 		return $ret;
 	}
 	
+	public function getSearchList($srch, $page=1, $lpp=20)
+	{
+		$lpp = intval($lpp);
+		$page = intval($page);
+		if ($page < 1) {
+			$page = 1;
+		}
+		if ($lpp > 1000) {
+			$lpp = 1000;
+		}
+		$offset = ($page-1) * $lpp;
+
+		$query = "
+			select 
+				distinct u.*
+			from
+				users u
+			join users_info ui on u.id=ui.user_id
+			where
+				u.type='secure' and u.brand=:brand and
+				(
+					u.name like :srch or
+					u.phone like :srch or
+					u.email like :srch or
+					u.country like :srch or
+					ui.val like :srch
+				)
+			";
+		
+		$query .= " limit $offset,$lpp";
+		
+		if (!$st = $this->db()->prepare($query)) {
+			$this->logger->error("Can not get Search List: " . print_r ($st->errorInfo(), true));
+			return false;
+		}
+		
+		$st->bindValue(':srch', '%'.$srch.'%', PDO::PARAM_STR);
+		$st->bindValue(':brand', BRAND, PDO::PARAM_STR);
+		
+		if (!$st->execute()) {
+			$this->logger->error("Can not execute Search List: " . print_r ($st->errorInfo(), true));
+			return false;
+		}
+		
+		$ret = array ();
+		while ($f=$st->fetch(PDO::FETCH_ASSOC)) {
+			$ret[$f['id']] = $f;
+		}
+		
+		return $ret;
+	}
+
+	public function getCustomSearchList($conditions, $srch, $page=1, $lpp=20)
+	{
+		$lpp = intval($lpp);
+		$page = intval($page);
+		if ($page < 1) {
+			$page = 1;
+		}
+		if ($lpp > 1000) {
+			$lpp = 1000;
+		}
+		$offset = ($page-1) * $lpp;
+		
+		$query = "
+			select 
+				distinct u.*
+			from
+				users u
+			left join users_info ui on u.id=ui.user_id
+			where
+				u.type='secure' and u.brand=:brand and
+				(
+					u.name like :srch or
+					u.phone like :srch or
+					u.email like :srch or
+					u.country like :srch or
+					ui.val like :srch
+				)
+			";
+		$bind = array ();
+		if ($conditions) {
+			$cond = '';
+			foreach ($conditions as $attr=>$value) {
+				if (in_array ($attr, $this->masterFields)) {
+					if (!is_array ($value)) {
+						$value = array ('=', $value);
+					}
+					$cond .= ' and ' .$attr . ' '.$value[0].' :v'.$attr;
+					$bind[$attr] = $value[1];
+				}
+			}
+			$query .= $cond;
+		}
+		
+		$query .= " limit $offset,$lpp";
+		
+		if (!$st = $this->db()->prepare($query)) {
+			$this->logger->error("Can not get Custom Search List: " . print_r ($st->errorInfo(), true));
+			return false;
+		}
+		
+		foreach ($bind as $k=>$v) {
+			$st->bindValue(':v'.$k, $v, $this->fieldTypes[$k]=='INT' ? PDO::PARAM_INT : PDO::PARAM_STR);
+		}
+		
+		$st->bindValue(':srch', '%'.$srch.'%', PDO::PARAM_STR);
+		$st->bindValue(':brand', BRAND, PDO::PARAM_STR);
+		
+		if (!$st->execute()) {
+			$this->logger->error("Can not execute Custom Search List: " . print_r ($st->errorInfo(), true));
+			return false;
+		}
+		
+		$ret = array ();
+		while ($f=$st->fetch(PDO::FETCH_ASSOC)) {
+			$ret[$f['id']] = $f;
+		}
+		
+		return $ret;
+	}
+	
 	private function isUID($id)
 	{
 		if (strlen($id) > 16) {
