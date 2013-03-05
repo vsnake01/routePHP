@@ -18,7 +18,7 @@ class Redirect
 	
 	static public function url($url)
 	{
-		if (!preg_match ('|http://|', $url)) {
+		if (!preg_match ('|https?://|', $url)) {
 			$url = URL::getBase().$url;
 		}
 		self::sendRedirect($url);
