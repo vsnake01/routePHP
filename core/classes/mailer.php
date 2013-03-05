@@ -68,6 +68,10 @@ class Mailer extends Config
 			// Set From message
 			->setFrom($from);
 			
+			if ($bcc = $this->getConfig('bcc')) {
+				$message->setBcc($bcc);
+			}
+			
 			if (!$text_only) {
 				// Add images
 				if ($this->getConfig('images')) {

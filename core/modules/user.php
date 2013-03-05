@@ -36,8 +36,14 @@ class User extends Base
 	);
 	private $id=null;
 		
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
+	}
+	
+	public function getFull()
+	{
+		return $this->userInfo;
 	}
 	
 	public function findSimilar($id)
