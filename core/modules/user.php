@@ -59,6 +59,8 @@ class User extends Base
 		
 		$parts = explode(' ', $f['name']);
 		
+		$cond = '';
+		
 		foreach ($parts as $k=>$v) {
 			$v = substr($this->db()->quote($v), 1, -1);
 			$cond .= " and name like '%$v%'";
