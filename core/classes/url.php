@@ -60,7 +60,7 @@ class Url
 		$parts = explode('/', self::getPath());
 		
 		if (isset ($parts[$num])) {
-			return $parts[$num];
+			return rawurldecode($parts[$num]);
 		}
 		
 		return false;
