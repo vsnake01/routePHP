@@ -53,8 +53,15 @@ try
 	}
 	if (APP_LEVEL == 'SCHEDULER') {
 		$q = new Queue();
-		for ($i=0;$i<15;$i++) {
-			$q->run();
+		if (!empty($argv[2]) && $argv[2]=='daemon') {
+			do {
+				$q->run();
+				sleep(1);
+			} while(1);
+		} else {
+			for ($i=0;$i<15;$i++) {
+				$q->run();
+			}
 		}
 	}
 	
