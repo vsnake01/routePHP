@@ -53,7 +53,13 @@ try
 	}
 	if (APP_LEVEL == 'SCHEDULER') {
 		$q = new Queue();
-		if (!empty($argv[2]) && $argv[2]=='daemon') {
+		$daemon = false;
+		foreach ($argv as $a) {
+			if ($a == 'daemon') {
+				$daemon = true;
+			}
+		}
+		if ($daemon) {
 			do {
 				$q->run();
 				sleep(1);
