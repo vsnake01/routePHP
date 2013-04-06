@@ -328,10 +328,16 @@ class User extends Base
 			return false;
 		}
 		
-		// Convert bit fields
-		$ret['deleted'] = ord($ret['deleted']) ? true : false;
-		$ret['verified'] = ord($ret['verified']) ? true : false;
-		$ret['completed'] = ord($ret['completed']) ? true : false;
+		// Convert bit fields if exists
+		if (ord($ret['deleted']) < 2) {
+			$ret['deleted'] = ord($ret['deleted']) ? true : false;
+			$ret['verified'] = ord($ret['verified']) ? true : false;
+			$ret['completed'] = ord($ret['completed']) ? true : false;
+		} else {
+			$ret['deleted'] = $ret['deleted'] ? true : false;
+			$ret['verified'] = $ret['verified'] ? true : false;
+			$ret['completed'] = $ret['completed'] ? true : false;
+		}
 		
 		$query = "select * from users_info where user_id=:id";
 		
