@@ -20,6 +20,8 @@ class Form
 	
 	static public function render($form, $output=false)
 	{
+		try {
+			
 		$pfbc = new PFBC\Form(
 				isset($form['form']['name'])
 					? $form['form']['name']
@@ -98,8 +100,8 @@ class Form
 					)
 			);
 		}
-		try {
-			return $pfbc->render($output);
+		return $pfbc->render($output);
+
 		} catch (Exception $e) {
 			
 		}
