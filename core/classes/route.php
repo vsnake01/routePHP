@@ -95,16 +95,8 @@ class Route extends Config
 	 */
 	protected function fireHooks()
 	{
-		/*self::$hookTrigger++;
-		$parents = class_parents($this);
+		$this->before();
 		
-		if (!is_array ($parents)) {
-			return false;
-		}
-		if (self::$hookTrigger < count($parents)) {
-			return;
-		}
-		*/
 		// Let do some hooks
 		if (!empty($_GET)) {
 			$this->_GET();
@@ -130,7 +122,6 @@ class Route extends Config
 			exit;
 		}
 		
-		$this->before();
 	}
 	
 	public function __destruct() {
