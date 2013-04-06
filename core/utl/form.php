@@ -98,8 +98,11 @@ class Form
 					)
 			);
 		}
-		
-		return $pfbc->render($output);
+		try {
+			return $pfbc->render($output);
+		} catch (Exception $e) {
+			
+		}
 	}
 	
 }
