@@ -7,6 +7,9 @@
  */
 class Queue extends Base
 {
+	const SORT_ASC	= 'asc';
+	const SORT_DESC	= 'desc';
+	
 	private $taskMapper = array ();
 	
 	public function __construct($logger=true)
@@ -131,11 +134,12 @@ class Queue extends Base
 		return $st->execute() ? true : false;
 	}
 	
-	public function getList($task, $processed=false)
+	public function getList($task, $processed=false, $sorting=null)
 	{
 		$processed = $processed ? 1 : 0;
+		$sort = ($sorting==self::SORT_DESC) ? 'desc' : 'asc';
 		
-		$query = "select id, created, params from queue where task=:task and processed=$processed and brand=:brand order by id asc limit 100";
+		$query = "select id, created, params from queue where task=:task and processed=$processed and brand=:brand order by id $sort limit 100";
 		
 		$st = $this->db()->prepare($query);
 		
