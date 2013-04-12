@@ -4,3 +4,6 @@
 [submodule "core/ext/pfbc"]
 	path = core/ext/pfbc
 	url = https://github.com/vsnake01/php-form-builder-class.git
+[submodule "core/ext/Propel"]
+	path = core/ext/Propel
+	url = https://github.com/propelorm/Propel.git
