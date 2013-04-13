@@ -333,6 +333,7 @@ class Route extends Config
 				$file_brand_ = $folder_brand_.'.php';
 				
 				if (file_exists($folder_brand_)) {
+					$FOLDER_S_BRAND = $folder_brand_;
 					continue;
 				}
 				
@@ -341,6 +342,7 @@ class Route extends Config
 				}
 				
 				if (file_exists($folder_)) {
+					$FOLDER_S = $folder_;
 					continue;
 				}
 				
