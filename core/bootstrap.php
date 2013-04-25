@@ -104,6 +104,7 @@ function MainLoad($className)
 	}
 	
 	$classNameFile = str_replace ('\\', '/', $className).'.php';
+	$dirNameFile = str_replace ('\\', '/', $className);
 	
 	if (preg_match ('|^\/routes|', $classNameFile)) {
 		// Load Route
