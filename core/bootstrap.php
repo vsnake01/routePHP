@@ -114,7 +114,10 @@ function MainLoad($className)
 		}
 	} else {
 		foreach ($paths as $path) {
-			if (file_exists ($path.$classNameFile)) {
+			if (file_exists ($path.$dirNameFile.$classNameFile)) {
+				include_once $path.$dirNameFile.$classNameFile;
+				return;
+			} elseif (file_exists ($path.$classNameFile)) {
 				include_once $path.$classNameFile;
 				return;
 			}
