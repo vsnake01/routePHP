@@ -359,6 +359,11 @@ class User extends Base
 			}
 		}
 		
+		$names = explode(' ', $ret['name']);
+		
+		$ret['first_name'] = $names[0];
+		$ret['last_name'] = isset($names[1])?$names[1]:'';
+		
 		$this->userInfo = $ret;
 		
 		return $ret['id'];
