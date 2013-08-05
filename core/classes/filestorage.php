@@ -165,6 +165,16 @@ class FileStorage
 		
 		return $hash.$fileExt;
 	}
+	
+	static public function getPath($storageName='')
+	{
+		$storageName = preg_replace('/[^a-z0-1\-\_]/', '', $storageName);
+		
+		return 	PATH_VAR 
+			. '/' . self::$basePath 
+			. (BRAND ? '/'.BRAND : '') 
+			. ($storageName ? '/'.$storageName : '');
+	}
 
 	static private function makePath($hash, $storageName='')
 	{
