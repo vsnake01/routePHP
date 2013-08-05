@@ -133,6 +133,24 @@ class FileStorage
 				);
 	}
 	
+	static public function createPath($filename, $storageName, $fileIsKey=false)
+	{
+		if ($fileIsKey) {
+			$hash = substr($filename, 0, 32);
+			$fileExt = '';
+		} else {
+			$hash = md5($filename . uniqid(time(), true));
+			$fileExt = '.' . pathinfo($filename, PATHINFO_EXTENSION);
+		}
+		
+		$fileExt = strtolower($fileExt);
+		
+		$path = self::makePath($hash, $storageName);
+		
+		return $path;
+		
+	}
+	
 	/**
 	 * Put contents into storage
 	 * @param string $filename Name of the file how it should looks like
@@ -166,17 +184,7 @@ class FileStorage
 		return $hash.$fileExt;
 	}
 	
-	static public function getPath($storageName='')
-	{
-		$storageName = preg_replace('/[^a-z0-1\-\_]/', '', $storageName);
-		
-		return 	PATH_VAR 
-			. '/' . self::$basePath 
-			. (BRAND ? '/'.BRAND : '') 
-			. ($storageName ? '/'.$storageName : '');
-	}
-
-	static private function makePath($hash, $storageName='')
+	static public function makePath($hash, $storageName='')
 	{
 		$storageName = preg_replace('/[^a-z0-1\-\_]/', '', $storageName);
 		
