@@ -133,7 +133,7 @@ class FileStorage
 				);
 	}
 	
-	static public function createPath($filename, $storageName, $fileIsKey=false)
+	static public function createPath($filename, $storageName='', $fileIsKey=false)
 	{
 		if ($fileIsKey) {
 			$hash = substr($filename, 0, 32);
