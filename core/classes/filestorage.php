@@ -151,6 +151,23 @@ class FileStorage
 		
 	}
 	
+	static public function createFullPath($filename, $storageName='', $fileIsKey=false)
+	{
+		if ($fileIsKey) {
+			$hash = substr($filename, 0, 32);
+			$fileExt = '';
+		} else {
+			$hash = md5($filename . uniqid(time(), true));
+			$fileExt = '.' . pathinfo($filename, PATHINFO_EXTENSION);
+		}
+		
+		$fileExt = strtolower($fileExt);
+		
+		$path = self::makePath($hash, $storageName);
+		
+		return $path.'/'.$hash.$fileExt;
+	}
+	
 	/**
 	 * Put contents into storage
 	 * @param string $filename Name of the file how it should looks like
