@@ -436,6 +436,15 @@ class Route extends Config
 	}
 	
 	/**
+	 * Return current language for TOKEN
+	 * @return String
+	 */
+	public function getLang()
+	{
+		$this->token->getLang();
+	}
+	
+	/**
 	 * Return TOKEN value
 	 * @param String $name
 	 * @return String
