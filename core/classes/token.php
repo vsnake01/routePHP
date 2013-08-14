@@ -64,6 +64,11 @@ class Token extends Base
 		$this->lang = $lang;
 	}
 	
+	public function getLang()
+	{
+		return $this->lang;
+	}
+	
 	public function queueRun($task) {
 		$info = explode(':', $task['params']);
 		
