@@ -415,13 +415,24 @@ class Route extends Config
 		$this->viewName = 'route';
 	}
 	
-	private function runScope($method) {
+	private function runScope($method)
+	{
 		if (isset($this->scoped[$method])) {
 			return null;
 		}
 		$this->scoped[$method] = true;
 		$this->$method();
 		$this->compile($this->viewName, $this->scopeName);
+	}
+	
+	/**
+	 * Set language for TOKEN
+	 * @param String $lang
+	 * @return void
+	 */
+	public function setLang($lang)
+	{
+		$this->token->setLang($lang);
 	}
 	
 	/**
