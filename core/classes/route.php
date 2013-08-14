@@ -441,7 +441,7 @@ class Route extends Config
 	 */
 	public function getLang()
 	{
-		$this->token->getLang();
+		return $this->token->getLang();
 	}
 	
 	/**
