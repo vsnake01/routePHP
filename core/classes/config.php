@@ -50,32 +50,35 @@ class Config
 		return null;
 	}
 	
-	public function getVar($group, $name) {
-		$path = realpath(PATH_VAR.'/'.$group.'/'.str_replace('\\', '/', strtolower(get_class($this))).'/'.$name);
+	public function getVar($group, $name, $lang=null) {
+		$path = array ();
+
+		$path[] = realpath(PATH_VAR.'/'.$group.'/'.str_replace('\\', '/', strtolower(get_class($this))).'/'.$name);
+		$path[] = realpath(PATH_VAR.'/'.$group.'/'.str_replace('\\', '/', strtolower(get_class($this))).'/'.BRAND.'/'.$name);
+		$path[] = realpath(PATH_VAR.'/'.$group.'/'.$name);
+		$path[] = realpath(PATH_VAR.'/'.$group.'/'.BRAND.'/'.$name);
+		
+		foreach ($path as $p) {
+			if ($lang) {
+				$pl = str_replace('/'.$name, '/'.$lang.'/'.$name, $p);
+				if (($ret = $this->returnVar($pl)) !== null) {
+					return $ret;
+				}
+			}
+			if (($ret = $this->returnVar($p)) !== null) {
+				return $ret;
+			}
+		}
+		return null;
+	}
+	
+	private function returnVar($path) {
 		if (stristr(PATH_VAR, $path) === null) {
 			return false;
 		}
 		if (file_exists($path)) {
 			return file_get_contents($path);
 		}
-		// Try to detect with brandname
-		$path = realpath(PATH_VAR.'/'.$group.'/'.str_replace('\\', '/', strtolower(get_class($this))).'/'.BRAND.'/'.$name);
-		if (file_exists($path)) {
-			return file_get_contents($path);
-		}
-		
-		// Try to detect without class
-		$path = realpath(PATH_VAR.'/'.$group.'/'.$name);
-		if (file_exists($path)) {
-			return file_get_contents($path);
-		}
-		
-		// Try to detect without class with brand
-		$path = realpath(PATH_VAR.'/'.$group.'/'.BRAND.'/'.$name);
-		if (file_exists($path)) {
-			return file_get_contents($path);
-		}
-		
 		return null;
 	}
 }
