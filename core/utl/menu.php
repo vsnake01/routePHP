@@ -6,9 +6,14 @@
  */
 class Menu {
 	
-	public static function tabs($links, $class='nav-tabs')
+	public static function tabs($links, $class=null, $header=null)
 	{
+		$class = $class ? $class : 'nav-tabs';
 		$menu = '<ul class="nav '.$class.'">';
+		
+		if ($header) {
+			$menu .= '<li class="nav-header">'.$header.'</li>';
+		}
 		
 		foreach ($links as $link=>$text) {
 			$menu .= 
