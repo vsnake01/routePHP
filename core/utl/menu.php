@@ -18,7 +18,7 @@ class Menu {
 		foreach ($links as $link=>$text) {
 			$menu .= 
 				'<li' .
-				((\Url::getPath() == $link) ? ' class="active"' : '' ) .
+				((stristr(\Url::getPath(), $link) !== false) ? ' class="active"' : '' ) .
 				'><a href="' . $link . '">' . $text . '</a>' .
 				'</li>';
 		}
