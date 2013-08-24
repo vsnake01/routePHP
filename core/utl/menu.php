@@ -6,9 +6,9 @@
  */
 class Menu {
 	
-	public static function tabs($links)
+	public static function tabs($links, $class='nav-tabs')
 	{
-		$menu = '<ul class="nav nav-tabs">';
+		$menu = '<ul class="nav '.$class.'">';
 		
 		foreach ($links as $link=>$text) {
 			$menu .= 
