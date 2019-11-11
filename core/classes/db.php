@@ -22,12 +22,11 @@ class DB extends PDO
 			try {
 				self::$instances[$hash] = new DB($dsn, $username, $password, $options);
 				self::$instances[$hash]->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+				return self::$instances[$hash];
 			} catch (Exception $e) {
 				// TODO: make this visible
 			}
 		}
-			
-		return self::$instances[$hash];
 	}
 	
 	static public function getNewInstance($dsn, $username, $password, $options)
